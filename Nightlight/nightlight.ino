@@ -29,7 +29,7 @@ void setup() {
  * Parameter increment: increment (true) or decrement (false)
  */
 int changeValue(int value, boolean increment) {
-  return constrain((increment) ? value + 1 : value - 1, 0, BRIGHTNESS);;
+  return constrain((increment) ? value + 1 : value - 1, 0, BRIGHTNESS);
 }
 
 /*

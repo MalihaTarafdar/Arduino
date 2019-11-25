@@ -10,12 +10,13 @@ const int BUTTONS[] = {10, 9, 8, 7, 6, 5, 4};
 const int HIGHER_OCTAVE_BUTTON = 2;
 const int LOWER_OCTAVE_BUTTON = 3;
 
-//frequencies of notes in 4th octave
+//frequencies of notes in 4th octave (STARTING_OCTAVE)
 //Note order: C, D, E, F, G, A, B
 const double notes[] = {261.63, 293.66, 329.63, 349.23, 392, 440, 493.88};
 
-int octave = 4;
-const int OCTAVE_MIN = 4;
+int octave = 4; //current octave
+const int STARTING_OCTAVE = 4;
+const int OCTAVE_MIN = 3;
 const int OCTAVE_MAX = 7;
 boolean octaveIncreased = false;
 boolean octaveDecreased = false;
@@ -32,7 +33,8 @@ void setup() {
 
 void playSound(int buttonNum) {
   while (digitalRead(BUTTONS[buttonNum])) {
-    tone(SPEAKER, notes[buttonNum] * pow(2, octave - OCTAVE_MIN), 100);
+    //frequency of note is (frequency at 4th octave) * 2^(distance from 4th octave)
+    tone(SPEAKER, notes[buttonNum] * pow(2, octave - STARTING_OCTAVE), 100);
   }
 }
 
@@ -43,10 +45,10 @@ void loop() {
 
   //checks if button to change octave is pressed and checks if the octave was already changed
   if (digitalRead(HIGHER_OCTAVE_BUTTON) && !octaveIncreased) {
-    octave = constrain(octave + 1, 4, 7);
+    octave = constrain(octave + 1, OCTAVE_MIN, OCTAVE_MAX);
     octaveIncreased = true;
   } else if (digitalRead(LOWER_OCTAVE_BUTTON) && !octaveDecreased) {
-    octave = constrain(octave - 1, 4, 7);
+    octave = constrain(octave - 1, OCTAVE_MIN, OCTAVE_MAX);
     octaveDecreased = true;
   }
   if (!digitalRead(HIGHER_OCTAVE_BUTTON)) octaveIncreased = false;

@@ -11,7 +11,7 @@ This program is able to scramble and solve a 3x3x3 Rubik's Cube. Six DC motors a
 ## RGB_LED_with_button
 Pressing the button toggles the state of the RGB LED, turing it on or off. When the RGB LED is on, it will gradually cycle through different colors. 
 
-### Nightlight
+## Nightlight
 This is the same as RGB_LED_with_buttons except instead of a button to turn the RGB LED on and off, there is a photoresistor to turn the LED on when the environment is dark enough. 
 
 ## FINAL_PROJECT
